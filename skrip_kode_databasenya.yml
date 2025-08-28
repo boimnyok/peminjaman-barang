@@ -1,0 +1,88 @@
+CREATE DATABASE db_peminjaman;
+USE db_peminjaman;
+
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    nama_lengkap VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE barang (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    kode_inventaris VARCHAR(20) NOT NULL UNIQUE,
+    nama_barang VARCHAR(100) NOT NULL,
+    deskripsi TEXT,
+    kategori VARCHAR(50),
+    status ENUM('tersedia', 'dipinjam', 'rusak', 'hilang') DEFAULT 'tersedia',
+    gambar VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE peminjaman (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    kode_peminjaman VARCHAR(20) NOT NULL UNIQUE,
+    nama_peminjam VARCHAR(100) NOT NULL,
+    nomor_identitas VARCHAR(50) NOT NULL,
+    instansi VARCHAR(100),
+    no_telepon VARCHAR(20),
+    email VARCHAR(100),
+    tanggal_pinjam DATE NOT NULL,
+    tanggal_kembali DATE NOT NULL,
+    status ENUM('menunggu', 'disetujui', 'ditolak', 'selesai') DEFAULT 'menunggu',
+    catatan TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE detail_peminjaman (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_peminjaman INT NOT NULL,
+    id_barang INT NOT NULL,
+    jumlah INT DEFAULT 1,
+    FOREIGN KEY (id_peminjaman) REFERENCES peminjaman(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_barang) REFERENCES barang(id)
+);
+
+-- Insert admin default
+INSERT INTO users (username, password, nama_lengkap) 
+VALUES ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrator');
+-- Password: password
+
+
+--------------------------------------------------------------------------------------------------
+Instalasi dan Konfigurasi
+1. Persiapan Server:
+   - Pastikan Anda memiliki server web (XAMPP, WAMP, atau LAMP) dengan PHP dan MySQL
+   - Buat database db_peminjaman dan import struktur tabel yang disediakan
+
+2. Struktur Folder:
+
+/aplikasi-peminjaman/
+├── assets/
+│   ├── css/
+│   │   ├── bootstrap.min.css
+│   │   ├── dashboard.css
+│   │   └── signin.css
+│   └── js/
+│       └── bootstrap.bundle.min.js
+├── components/
+│   ├── header.php
+│   └── sidebar.php
+├── config/
+│   └── database.php
+├── uploads/
+├── barang.php
+├── index.php
+├── login.php
+├── logout.php
+├── laporan.php
+└── peminjaman.php
+
+3. Konfigurasi Database:
+   - Edit file config/database.php dan sesuaikan dengan kredensial database Anda
+
+4. Akses Aplikasi:
+   - Buka browser dan akses http://localhost/aplikasi-peminjaman
+   - Login dengan username: admin dan password: password
+
