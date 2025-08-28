@@ -3,6 +3,8 @@ Menggunakan PHP Native dan Bootstrap 5 untuk tampilannya.
 Cocok untuk siswa, mahasiswa, dan umum yang sedang belajar bahasa pemrograman PHP. 
 Bukan untuk para programmer expert di PHP karena aplikasi ini masih sederhana dan butuh pengembangan ke depannya.
 
+Versi XAMPP yang digunakan adalah xampp 7.4.33
+
 Fitur yang ada di Aplikasi Peminjaman Barang
 
 Sistem Autentikasi
