@@ -40,5 +40,4 @@ Antarmuka Pengguna
 
 Catatan :
 - Source Code dalam aplikasi ini bebas digunakan oleh siapa saja dan tidak ada lisensi
-- Ada yang mau traktir kopi ?? Hahaha... Bercanda Euy :)
 
